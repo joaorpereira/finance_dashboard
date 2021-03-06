@@ -1,11 +1,13 @@
 import React from 'react'
 import Dashboard from './screens/Dashboard'
+import GlobalStyle from './styles/GlobalStyles'
 
 const app: React.FC = () => {
   return (
-    <div>
+    <>
+      <GlobalStyle />
       <Dashboard />
-    </div>
+    </>
   )
 }
 
