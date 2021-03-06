@@ -1,15 +1,19 @@
 import React from 'react'
-import Dashboard from './screens/Dashboard'
+import { ThemeProvider } from 'styled-components'
+import {  BrowserRouter as Router } from "react-router-dom";
 import GlobalStyle from './styles/GlobalStyles'
+import Main from './template/MainContent/MainContent'
+import theme from './styles/theme'
 
 const app: React.FC = () => {
   return (
-    <>
-      <GlobalStyle />
-      <Dashboard />
-    </>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Main />
+      </ThemeProvider>
+    </Router>
   )
 }
 
 export default app
-

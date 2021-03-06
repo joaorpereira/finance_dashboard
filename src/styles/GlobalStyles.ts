@@ -9,8 +9,8 @@ const GlobalStyle = createGlobalStyle`
 
     html, body, #root {
         width: 100vw;
-        height: 100%;
-        background-color: #fff;
+        height: 100vh;
+        background-color: ${props => props.theme.colors.backgroundColor};
         font-family: 'Roboto', sans-serif;
         font-size: 1rem;
     }
@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
+        outline: none;
     }
 `
 
