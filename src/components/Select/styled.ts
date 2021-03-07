@@ -17,7 +17,7 @@ export const Select = styled.select`
   position: relative;
   font-size: 0.85rem;
   padding: 0.4rem 0.7rem;
-  min-width: 100px;
+  min-width: 110px;
   border-radius: 0.5rem;
   border: none;
   background-color: lightgray;

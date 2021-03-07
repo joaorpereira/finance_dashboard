@@ -20,7 +20,7 @@ export const Button = styled.button`
   font-size: 1rem;
   flex-direction: column;
   padding: 0.4rem 1rem;
-  margin: 0px 1.5rem;
+  margin: 0rem 0rem 1rem 0rem;
   font-weight: 700;
   background-color: ${props => props.theme.colors.backgroundColor};
 `

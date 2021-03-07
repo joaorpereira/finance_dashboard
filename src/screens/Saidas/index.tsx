@@ -32,18 +32,18 @@ const Saidas: React.FC = () => {
   return (
     <S.Wrapper>
       <HeaderTitle title={'Saídas'} color={'#dc3545'}>
-        <Select
+        {/* <Select
           options={monthOptions}
           name='date'
           label='Mês'
-          onChange={() => null}
+          onChange={() => undefined}
         />
         <Select
           options={yearsOptions}
           name='ano'
           label='Ano'
-          onChange={() => null}
-        />
+          onChange={() => undefined}
+        /> */}
       </HeaderTitle>
       <S.Main>
         <FilterHeader onClickRecurrent={() => {}} onClickEventual={() => {}} />

@@ -9,14 +9,26 @@ interface ISelectInput {
     value: string | number
     option: string | number
   }[]
-  onChange: any
+  defaultValue?: string | number
+  onChange(event: React.ChangeEvent<HTMLSelectElement>): void | undefined
 }
 
-const Select: React.FC<ISelectInput> = ({ options, name, label, onChange }) => {
+const Select: React.FC<ISelectInput> = ({
+  options,
+  name,
+  label,
+  defaultValue,
+  onChange,
+}) => {
   return (
     <S.Container>
       <S.Label htmlFor={name}>{label}</S.Label>
-      <S.Select onChange={onChange} name={name} id={name}>
+      <S.Select
+        onChange={onChange}
+        name={name}
+        id={name}
+        defaultValue={defaultValue}
+      >
         {options &&
           options?.map(item => (
             <option value={item.value}>{item.option}</option>

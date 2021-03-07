@@ -20,6 +20,9 @@ interface IEntries {
 
 const Entradas: React.FC = () => {
   const [entriesData, setEntriesData] = useState<IEntries[]>([])
+  const [filteredData, setFilteredData] = useState<IEntries[]>([])
+  const [month, setMonth] = useState<string>(String(new Date().getMonth() + 1))
+  const [year, setYear] = useState<string>(String(new Date().getFullYear()))
 
   useEffect(() => {
     const newEntries = mockCardData.filter(
@@ -28,6 +31,18 @@ const Entradas: React.FC = () => {
     setEntriesData(newEntries)
   }, [])
 
+  useEffect(() => {
+    if (month && year) {
+      const newData = entriesData.filter(item => {
+        const date = new Date(item.date)
+        const monthEntry = String(date.getMonth() + 1)
+        const yearEntry = String(date.getFullYear())
+        return month === monthEntry && year === yearEntry
+      })
+      setFilteredData(newData)
+    }
+  }, [entriesData, month, year])
+
   return (
     <S.Wrapper>
       <HeaderTitle title={'Entradas'} color={'#28a745'}>
@@ -35,28 +50,39 @@ const Entradas: React.FC = () => {
           options={monthOptions}
           name='date'
           label='Mês'
-          onChange={() => null}
+          defaultValue={month}
+          onChange={e => setMonth(e.target.value)}
         />
         <Select
           options={yearsOptions}
           name='ano'
           label='Ano'
-          onChange={() => null}
+          defaultValue={year}
+          onChange={e => setYear(e.target.value)}
         />
       </HeaderTitle>
       <S.Main>
         <FilterHeader onClickRecurrent={() => {}} onClickEventual={() => {}} />
         <S.Box>
-          {entriesData &&
-            entriesData.map(item => (
-              <Card
-                key={item.id}
-                value={item.value}
-                description={item.description}
-                date={item.date}
-                type={item.type}
-              />
-            ))}
+          {!filteredData && entriesData
+            ? entriesData.map(item => (
+                <Card
+                  key={item.id}
+                  value={item.value}
+                  description={item.description}
+                  date={item.date}
+                  type={item.type}
+                />
+              ))
+            : filteredData.map(item => (
+                <Card
+                  key={item.id}
+                  value={item.value}
+                  description={item.description}
+                  date={item.date}
+                  type={item.type}
+                />
+              ))}
         </S.Box>
       </S.Main>
     </S.Wrapper>

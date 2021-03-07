@@ -10,18 +10,18 @@ const Dashboard: React.FC = () => {
   return (
     <S.Wrapper>
       <HeaderTitle title={'Dashboard'} color={'#222831'}>
-        <Select
+        {/* <Select
           options={monthOptions}
           name='date'
           label='Mês'
-          onChange={() => null}
+          onChange={() => undefined}
         />
         <Select
           options={yearsOptions}
           name='ano'
           label='Ano'
-          onChange={() => null}
-        />
+          onChange={() => undefined}
+        /> */}
       </HeaderTitle>
       <S.Main></S.Main>
     </S.Wrapper>
