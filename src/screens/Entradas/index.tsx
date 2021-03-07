@@ -1,13 +1,19 @@
 import React from 'react'
 import Select from '../../components/Select'
-import Title from '../../components/Title'
+import HeaderTitle from '../../components/HeaderTitle'
 import { monthOptions } from '../../utils/monthOptions'
 import { yearsOptions } from '../../utils/yearsOptions'
 
+import mockCardData from '../../mock/cardsMockData'
+
+import * as S from './styled'
+import FilterHeader from '../../components/FilterHeader'
+import Card from '../../components/Card'
+
 const Entradas: React.FC = () => {
   return (
-    <div>
-      <Title title={'Entradas'} color={'#222831'}>
+    <S.Wrapper>
+      <HeaderTitle title={'Entradas'} color={'#28a745'}>
       <Select
           options={monthOptions}
           name='date'
@@ -20,8 +26,22 @@ const Entradas: React.FC = () => {
           label='Ano'
           onChange={() => null}
         />
-      </Title>
-    </div>
+      </HeaderTitle>
+      <S.Main>
+        <FilterHeader onClickRecurrent={() => {}} onClickEventual={() => {}} />
+        <S.Box>
+          {mockCardData &&
+            mockCardData.map(item => (
+              <Card
+                value={item.value}
+                description={item.description}
+                date={item.date}
+                type={item.type}
+              />
+            ))}
+        </S.Box>
+      </S.Main>
+    </S.Wrapper>
   )
 }
 

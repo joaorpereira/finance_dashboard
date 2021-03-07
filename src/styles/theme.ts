@@ -8,6 +8,7 @@ export default {
 
     white: '#fff',
     text: '#222831',
+    pinkPrimary: '#e600e9',
 
     success: '#28a745',
     info: '#17a2b8',
