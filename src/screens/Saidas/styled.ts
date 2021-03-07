@@ -18,4 +18,11 @@ export const Box = styled.div`
   overflow-y: scroll;
   max-height: 24rem;
   height: 24rem;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 10px;
+  }
 `
