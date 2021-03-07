@@ -15,21 +15,21 @@ export const sidebarOption: IListOption[] = [
   {
     name: 'Dashboard',
     logo: FaThLarge,
-    link: '/',
+    link: '/dashboard',
   },
   {
     name: 'Entradas',
     logo: FaFolderPlus,
-    link: '/',
+    link: '/entradas',
   },
   {
     name: 'Saídas',
     logo: FaFolderOpen,
-    link: '/',
+    link: '/saidas',
   },
   {
     name: 'Sair',
     logo: FaSignInAlt,
-    link: '/',
+    link: '/login',
   },
 ]

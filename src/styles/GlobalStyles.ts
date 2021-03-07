@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1rem;
     }
 
-    input, button{
+    input, button, select{
         outline: none;
         border: none;      
     }

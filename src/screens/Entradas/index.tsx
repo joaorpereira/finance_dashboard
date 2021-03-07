@@ -4,11 +4,11 @@ import Title from '../../components/Title'
 import { monthOptions } from '../../utils/monthOptions'
 import { yearsOptions } from '../../utils/yearsOptions'
 
-const Dashboard: React.FC = () => {
+const Entradas: React.FC = () => {
   return (
     <div>
-      <Title title={'Dashboard'} color={'#222831'}>
-        <Select
+      <Title title={'Entradas'} color={'#222831'}>
+      <Select
           options={monthOptions}
           name='date'
           label='Mês'
@@ -25,4 +25,4 @@ const Dashboard: React.FC = () => {
   )
 }
 
-export default Dashboard
+export default Entradas

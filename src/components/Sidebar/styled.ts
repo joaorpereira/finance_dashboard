@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-interface IList {
-  open: boolean
-}
-
 export const Container = styled.div`
   width: 240px;
   background: rgb(21,107,222);
