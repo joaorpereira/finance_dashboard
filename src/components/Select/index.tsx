@@ -20,6 +20,7 @@ const Select: React.FC<ISelectInput> = ({
   defaultValue,
   onChange,
 }) => {
+  console.log(options)
   return (
     <S.Container>
       <S.Label htmlFor={name}>{label}</S.Label>
@@ -27,12 +28,13 @@ const Select: React.FC<ISelectInput> = ({
         onChange={onChange}
         name={name}
         id={name}
-        defaultValue={defaultValue}
+        // defaultValue={defaultValue}
       >
-        {options &&
-          options?.map(item => (
-            <option value={item.value}>{item.option}</option>
-          ))}
+        {options.map((item, index) => (
+          <option key={index} value={item.value}>
+            {item.option}
+          </option>
+        ))}
       </S.Select>
       <S.Selector>
         <FaAngleDown style={{ color: '#222831' }} />

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
-import { monthOptions } from '../../utils/monthOptions'
-import { yearsOptions } from '../../utils/yearsOptions'
-
+import yearsOptions from '../../utils/yearsOptions'
+import monthList from '../../utils/monthList'
 import mockCardData from '../../mocks/cardsMockData'
 
 import * as S from './styled'
@@ -42,6 +41,25 @@ const Entradas: React.FC = () => {
       setFilteredData(newData)
     }
   }, [entriesData, month, year])
+
+  // const yearsOptions2 = useMemo(() => {
+  //   let uniqueYears: number[] = []
+  //   entriesData.forEach(item => {
+  //     const date = new Date(item.date)
+  //     const newYear = date.getFullYear()
+  //     if (!uniqueYears.includes(newYear)) {
+  //       uniqueYears.push(newYear)
+  //     }
+  //   })
+  //   return uniqueYears.map(year => ({ value: year, option: String(year) }))
+  // }, [entriesData])
+
+  const monthOptions = useMemo(() => {
+    return monthList.map((month, index) => ({
+      value: index + 1,
+      option: month,
+    }))
+  }, [])
 
   return (
     <S.Wrapper>

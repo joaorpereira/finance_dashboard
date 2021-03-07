@@ -1,8 +1,8 @@
 import React from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
-import { monthOptions } from '../../utils/monthOptions'
-import { yearsOptions } from '../../utils/yearsOptions'
+import monthList from '../../utils/monthList'
+import yearsOptions from '../../utils/yearsOptions'
 
 import * as S from './styled'
 
