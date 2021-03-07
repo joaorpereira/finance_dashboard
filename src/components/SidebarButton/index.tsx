@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Dispatch } from 'react'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import * as S from './styled'
 
 interface IProps {
   openSidebar: boolean
-  setOpenSidebar: any
+  setOpenSidebar: Dispatch<boolean>
 }
 
 const SidebarButton: React.FC<IProps> = ({ openSidebar, setOpenSidebar }) => {

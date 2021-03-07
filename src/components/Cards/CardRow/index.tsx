@@ -1,6 +1,6 @@
 import React from 'react'
-import formatCurrency from '../../utils/formatCurrency'
-import formatDate from '../../utils/formatDate'
+import formatCurrency from '../../../utils/formatCurrency'
+import formatDate from '../../../utils/formatDate'
 import * as S from './styled'
 
 enum Types {

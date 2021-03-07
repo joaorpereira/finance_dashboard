@@ -10,13 +10,7 @@ interface IProps {
 
 const Sidebar: React.FC<IProps> = ({ openSidebar }) => {
   return (
-    <S.Container
-      style={
-        openSidebar
-          ? { width: '240px', transition: '0.2s ease-in' }
-          : { width: '60px', transition: '0.2s ease-in' }
-      }
-    >
+    <S.Container openSidebar={openSidebar}>
       {openSidebar ? (
         <S.ImageBox>
           <S.Logo src={MyFinanceLogo} alt='my_finance' />
@@ -26,17 +20,9 @@ const Sidebar: React.FC<IProps> = ({ openSidebar }) => {
       )}
       <S.List>
         {sidebarOption.map(item => (
-          <S.ListItem
-            style={
-              openSidebar
-                ? { padding: '13px 0px 13px 20px' }
-                : { padding: '10px 4px' }
-            }
-            key={item.name}
-            to={item.link}
-          >
+          <S.ListItem openSidebar={openSidebar} key={item.name} to={item.link}>
             <item.logo />
-            {openSidebar ? <p>{item.name}</p> : null}
+            <p>{item.name}</p>
           </S.ListItem>
         ))}
       </S.List>

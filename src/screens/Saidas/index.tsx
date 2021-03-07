@@ -8,7 +8,7 @@ import mockCardData from '../../mocks/cardsMockData'
 
 import * as S from './styled'
 import FilterHeader from '../../components/FilterHeader'
-import Card from '../../components/Card'
+import Card from '../../components/Cards/CardRow'
 
 interface IEntries {
   id: number

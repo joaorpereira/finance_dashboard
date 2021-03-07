@@ -1,11 +1,20 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export const Container = styled.div`
-  width: 240px;
-  background: rgb(21,107,222);
-  background: linear-gradient(29deg, rgba(21,107,222,1) 0%, rgba(230,0,233,1) 100%);
+interface IContainer {
+  openSidebar: boolean
+}
+
+export const Container = styled.div<IContainer>`
+  width: ${props => (props.openSidebar ? '240px' : '60px')};
+  background: rgb(21, 107, 222);
+  background: linear-gradient(
+    29deg,
+    rgba(21, 107, 222, 1) 0%,
+    rgba(230, 0, 233, 1) 100%
+  );
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease-in;
   :hover {
     box-shadow: none;
   }
@@ -29,7 +38,7 @@ export const List = styled.ul`
   height: calc(100% - 56px);
 `
 
-export const ListItem = styled(Link)`
+export const ListItem = styled(Link)<IContainer>`
   color: ${props => props.theme.colors.white};
   font-size: 1.25rem;
   display: flex;
@@ -39,7 +48,10 @@ export const ListItem = styled(Link)`
   width: calc(100% - 15px);
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-in-out;
+  padding: ${props =>
+    props.openSidebar ? '10px 0px 13px 20px' : '10px 4px'};
+
   :hover {
     background-color: ${props => props.theme.colors.backgroundColor};
     color: ${props => props.theme.colors.text};
@@ -53,5 +65,6 @@ export const ListItem = styled(Link)`
     margin-left: 15px;
     letter-spacing: 0.05rem;
     font-weight: 700;
+    display: ${props => (props.openSidebar ? 'block' : 'none')};
   }
 `

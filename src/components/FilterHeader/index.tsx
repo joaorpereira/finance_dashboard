@@ -2,8 +2,8 @@ import React from 'react'
 import * as S from './styled'
 
 interface IFilterProps {
-  onClickRecurrent: any
-  onClickEventual: any
+  onClickRecurrent(event: React.MouseEvent<HTMLButtonElement>): void | undefined
+  onClickEventual(event: React.MouseEvent<HTMLButtonElement>): void | undefined
 }
 
 const FilterHeader: React.FC<IFilterProps> = ({
