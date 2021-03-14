@@ -2,20 +2,14 @@ import React from 'react'
 import formatCurrency from '../../../utils/formatCurrency'
 import formatDate from '../../../utils/formatDate'
 import * as S from './styled'
-
-enum Types {
-  EVENTUAL = 'EVENTUAL',
-  RECORRENTE = 'RECORRENTE',
-}
-
 interface ICardProps {
   description: string
   date: string
   value: number
-  type: string | Types
+  status: string
 }
 
-const Card: React.FC<ICardProps> = ({ description, date, value, type }) => {
+const Card: React.FC<ICardProps> = ({ description, date, value, status }) => {
   return (
     <S.Card>
       <S.CardInfo>
@@ -23,7 +17,7 @@ const Card: React.FC<ICardProps> = ({ description, date, value, type }) => {
         <p>{formatDate(date)}</p>
       </S.CardInfo>
       <p>{formatCurrency(value)}</p>
-      <S.Span color={type} />
+      <S.Span color={status} />
     </S.Card>
   )
 }

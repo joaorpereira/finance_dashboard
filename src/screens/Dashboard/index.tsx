@@ -2,7 +2,7 @@ import React from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
 import monthList from '../../utils/monthList'
-import yearsOptions from '../../utils/yearsOptions'
+import yearsOptions from '../../mocks/yearsOptions'
 
 import * as S from './styled'
 

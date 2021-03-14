@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
-import yearsOptions from '../../utils/yearsOptions'
+import yearsOptions from '../../mocks/yearsOptions'
 import monthList from '../../utils/monthList'
 import mockCardData from '../../mocks/cardsMockData'
 
@@ -14,14 +14,19 @@ interface IEntries {
   description: string
   value: number
   date: string
-  type: string
+  status: string
 }
+
+const today = new Date()
+const current_month = String(today.getMonth() + 1)
+const current_year = String(today.getFullYear())
 
 const Entradas: React.FC = () => {
   const [entriesData, setEntriesData] = useState<IEntries[]>([])
   const [filteredData, setFilteredData] = useState<IEntries[]>([])
-  const [month, setMonth] = useState<string>(String(new Date().getMonth() + 1))
-  const [year, setYear] = useState<string>(String(new Date().getFullYear()))
+  const [month, setMonth] = useState<string>(current_month)
+  const [year, setYear] = useState<string>(current_year)
+  const [status, setStatus] = useState<string>('')
 
   useEffect(() => {
     const newEntries = mockCardData.filter(
@@ -30,36 +35,47 @@ const Entradas: React.FC = () => {
     setEntriesData(newEntries)
   }, [])
 
-  useEffect(() => {
-    if (month && year) {
-      const newData = entriesData.filter(item => {
-        const date = new Date(item.date)
-        const monthEntry = String(date.getMonth() + 1)
-        const yearEntry = String(date.getFullYear())
-        return month === monthEntry && year === yearEntry
-      })
-      setFilteredData(newData)
-    }
-  }, [entriesData, month, year])
+  const filteredDataByDate = (month: string, year: string, status: string) => {
+    const newData: IEntries[] = entriesData.filter(item => {
+      const date = new Date(item.date)
+      const monthEntry = String(date.getMonth() + 1)
+      const yearEntry = String(date.getFullYear())
+      return (
+        month === monthEntry &&
+        year === yearEntry &&
+        item.status.includes(status)
+      )
+    })
+    setFilteredData(newData)
+  }
 
-  // const yearsOptions2 = useMemo(() => {
-  //   let uniqueYears: number[] = []
-  //   entriesData.forEach(item => {
-  //     const date = new Date(item.date)
-  //     const newYear = date.getFullYear()
-  //     if (!uniqueYears.includes(newYear)) {
-  //       uniqueYears.push(newYear)
-  //     }
-  //   })
-  //   return uniqueYears.map(year => ({ value: year, option: String(year) }))
-  // }, [entriesData])
+  useEffect(() => {
+    filteredDataByDate(month, year, status)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [month, year, status])
 
   const monthOptions = useMemo(() => {
-    return monthList.map((month, index) => ({
-      value: index + 1,
-      option: month,
-    }))
-  }, [])
+    const list = monthList
+      .map((month, index) => ({
+        value: index + 1,
+        option: month,
+      }))
+      .filter(month =>
+        Number(year) === Number(current_year)
+          ? Number(month.value) <= Number(current_month)
+          : month
+      )
+
+    return list
+  }, [year])
+
+  const handleStatus = (newStatus: string) => {
+    if (newStatus === status) {
+      setStatus('')
+    } else {
+      setStatus(newStatus)
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -80,7 +96,10 @@ const Entradas: React.FC = () => {
         />
       </HeaderTitle>
       <S.Main>
-        <FilterHeader onClickRecurrent={() => {}} onClickEventual={() => {}} />
+        <FilterHeader
+          onClickRecurrent={() => handleStatus('RECORRENTE')}
+          onClickEventual={() => handleStatus('EVENTUAL')}
+        />
         <S.Box>
           {!filteredData && entriesData
             ? entriesData.map(item => (
@@ -89,7 +108,7 @@ const Entradas: React.FC = () => {
                   value={item.value}
                   description={item.description}
                   date={item.date}
-                  type={item.type}
+                  status={item.status}
                 />
               ))
             : filteredData.map(item => (
@@ -98,7 +117,7 @@ const Entradas: React.FC = () => {
                   value={item.value}
                   description={item.description}
                   date={item.date}
-                  type={item.type}
+                  status={item.status}
                 />
               ))}
         </S.Box>

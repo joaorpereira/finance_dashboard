@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
 import monthList from '../../utils/monthList'
-import yearsOptions from '../../utils/yearsOptions'
+import yearsOptions from '../../mocks/yearsOptions'
 
 import mockCardData from '../../mocks/cardsMockData'
 
@@ -16,7 +16,7 @@ interface IEntries {
   description: string
   value: number
   date: string
-  type: string
+  status: string
 }
 
 const Saidas: React.FC = () => {
@@ -55,7 +55,7 @@ const Saidas: React.FC = () => {
                 value={item.value}
                 description={item.description}
                 date={item.date}
-                type={item.type}
+                status={item.status}
               />
             ))}
         </S.Box>

@@ -6,7 +6,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 2,
@@ -14,7 +14,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 3,
@@ -22,7 +22,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'EVENTUAL',
+    status: 'EVENTUAL',
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-02-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 5,
@@ -38,7 +38,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'EVENTUAL',
+    status: 'EVENTUAL',
   },
   {
     id: 6,
@@ -46,7 +46,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-02-10',
-    type: 'EVENTUAL',
+    status: 'EVENTUAL',
   },
   {
     id: 7,
@@ -54,7 +54,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'EVENTAUL',
+    status: 'EVENTAUL',
   },
   {
     id: 8,
@@ -62,7 +62,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-07-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 9,
@@ -70,7 +70,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'EVENTUAL',
+    status: 'EVENTUAL',
   },
   {
     id: 10,
@@ -78,7 +78,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-07-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 11,
@@ -86,7 +86,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 12,
@@ -94,7 +94,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-02-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 13,
@@ -102,7 +102,7 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-01-10',
-    type: 'EVENTUAL',
+    status: 'EVENTUAL',
   },
   {
     id: 14,
@@ -110,14 +110,14 @@ export default [
     description: 'Conta de Luz',
     value: 255.00,
     date: '2020-02-10',
-    type: 'RECORRENTE',
+    status: 'RECORRENTE',
   },
   {
     id: 15,
     operation_type: 'ENTRADA',
     description: 'Conta de Luz',
     value: 255.00,
-    date: '2020-01-10',
-    type: 'EVENTUAL',
+    date: '2020-05-10',
+    status: 'EVENTUAL',
   },
 ]
