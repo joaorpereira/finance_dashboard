@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import * as S from './styled'
 import MyFinanceLogo from '../../assets/logo.svg'
@@ -9,6 +9,12 @@ interface IProps {
 }
 
 const Sidebar: React.FC<IProps> = ({ openSidebar }) => {
+  const [selected, setSelected] = useState<string>('Dashboard')
+
+  const handleSelected = (name: string) => {
+    setSelected(name)
+  }
+
   return (
     <S.Container openSidebar={openSidebar}>
       {openSidebar ? (
@@ -20,7 +26,13 @@ const Sidebar: React.FC<IProps> = ({ openSidebar }) => {
       )}
       <S.List>
         {sidebarOption.map(item => (
-          <S.ListItem openSidebar={openSidebar} key={item.name} to={item.link}>
+          <S.ListItem
+            onClick={() => handleSelected(item.name)}
+            openSidebar={openSidebar}
+            selected={openSidebar && item.name === selected}
+            key={item.name}
+            to={item.link}
+          >
             <item.logo />
             <p>{item.name}</p>
           </S.ListItem>

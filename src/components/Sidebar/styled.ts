@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 interface IContainer {
   openSidebar: boolean
+  selected?: boolean
 }
 
 export const Container = styled.div<IContainer>`
@@ -39,7 +40,6 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled(Link)<IContainer>`
-  color: ${props => props.theme.colors.white};
   font-size: 1.25rem;
   display: flex;
   align-items: center;
@@ -49,8 +49,12 @@ export const ListItem = styled(Link)<IContainer>`
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   transition: 0.2s ease-in-out;
-  padding: ${props =>
-    props.openSidebar ? '10px 0px 13px 20px' : '10px 4px'};
+  padding: ${props => (props.openSidebar ? '10px 0px 13px 20px' : '10px 4px')};
+
+  background-color: ${props =>
+    props.selected ? props.theme.colors.backgroundColor : ''};
+  color: ${props =>
+    props.selected ? props.theme.colors.text : props.theme.colors.white};
 
   :hover {
     background-color: ${props => props.theme.colors.backgroundColor};

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
 import yearsOptions from '../../mocks/yearsOptions'
