@@ -1,22 +1,14 @@
-import React, { ReactNode } from 'react'
+import React  from 'react'
 import * as S from './styled'
 
-interface IInputProps {
-  height?: any
-  children?: ReactNode
+interface ICardContent {
   positive: boolean
   image: any
-  color: string
 }
 
-const CardContent: React.FC<IInputProps> = ({
-  image,
-  positive,
-  height,
-  color,
-}) => {
+const CardContent: React.FC<ICardContent> = ({ image, positive }) => {
   return (
-    <S.Card height={height}>
+    <S.Card>
       <S.Content>
         <S.Header>
           <h4>{positive ? 'Muito bom!' : 'É hora de poupar'}</h4>

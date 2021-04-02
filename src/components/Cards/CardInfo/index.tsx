@@ -1,15 +1,16 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
+import formatCurrency from '../../../utils/formatCurrency'
 import * as S from './styled'
 
-interface IInputProps {
+interface ICardInfo {
   title: string
-  value: string
+  value: number
   Image: any
   backgroundColor: string
   message: string
 }
 
-const CardInfo: React.FC<IInputProps> = ({
+const CardInfo: React.FC<ICardInfo> = ({
   title,
   value,
   Image,
@@ -21,7 +22,7 @@ const CardInfo: React.FC<IInputProps> = ({
       <S.Content>
         <S.Header>
           <p>{title}</p>
-          <h2>{`R$ ${value}`}</h2>
+          <h2>{formatCurrency(value)}</h2>
         </S.Header>
         <S.Message>{message}</S.Message>
       </S.Content>

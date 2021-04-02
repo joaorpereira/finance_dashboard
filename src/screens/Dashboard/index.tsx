@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
 import monthList from '../../utils/monthList'
@@ -13,12 +13,27 @@ import PoorBoy from '../../assets/poor_boy.svg'
 import RichBoy from '../../assets/rich_boy.svg'
 import { FaArrowUp, FaArrowDown, FaDollarSign } from 'react-icons/fa'
 
+import mockCardData from '../../mocks/cardsMockData'
+
 import { options } from './constants'
 import { current_month, current_year } from '../../utils/constants'
+interface IBalance {
+  id: number
+  operation_type: string
+  description: string
+  value: number
+  date: string
+  status: string
+}
 
 const Dashboard: React.FC = () => {
+  const [data, setData] = useState<IBalance[]>([])
+  const [filteredData, setFilteredData] = useState<IBalance[]>([])
   const [month, setMonth] = useState<string>(current_month)
   const [year, setYear] = useState<string>(current_year)
+  const [income, setIncome] = useState<number>()
+  const [outcome, setOutcome] = useState<number>()
+  const [expenses, setExpenses] = useState<number>()
 
   const monthOptions = useMemo(() => {
     const list = monthList
@@ -34,6 +49,42 @@ const Dashboard: React.FC = () => {
 
     return list
   }, [year])
+
+  useEffect(() => {
+    setTimeout(function () {
+      setData(mockCardData)
+    }, 3000)
+  }, [])
+
+  const filteredDataByDate = (month: string, year: string) => {
+    const newData: IBalance[] = mockCardData.filter(item => {
+      const date = new Date(item.date)
+      const monthEntry = String(date.getMonth() + 1)
+      const yearEntry = String(date.getFullYear())
+      return month === monthEntry && year === yearEntry
+    })
+    setFilteredData(newData)
+    handleValues(newData)
+  }
+
+  useEffect(() => {
+    filteredDataByDate(month, year)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [month, year, data])
+
+  const handleValues = (data: IBalance[]) => {
+    const income = data
+      .filter(item => item.operation_type === 'ENTRADA')
+      .reduce((acc, val) => acc + val.value, 0)
+    const outcome = data
+      .filter(item => item.operation_type === 'SAIDA')
+      .reduce((acc, val) => acc + val.value, 0)
+
+    const total = income - outcome
+    setIncome(income)
+    setOutcome(outcome)
+    setExpenses(total)
+  }
 
   return (
     <S.Wrapper>
@@ -58,41 +109,39 @@ const Dashboard: React.FC = () => {
           <CardInfo
             title='saldo'
             backgroundColor='#0085b6'
-            value='150'
+            value={expenses ? expenses : 0}
             message='atualizado com base nas entradas e saídas'
             Image={FaDollarSign}
           />
           <CardInfo
             title='entradas'
             backgroundColor='#00d49d'
-            value='150'
+            value={income ? income : 0}
             message='atualizado com base nas entradas e saídas'
             Image={FaArrowUp}
           />
           <CardInfo
             title='saídas'
             backgroundColor='#ff005d'
-            value='150'
+            value={outcome ? outcome : 0}
             message='atualizado com base nas entradas e saídas'
             Image={FaArrowDown}
           />
         </S.Row>
         <S.Row>
-          <CardContent
-            positive={true}
-            image={true ? RichBoy : PoorBoy}
-            color={true ? '#00d49d' : '#ff005d'}
-          />
+          <CardContent positive={true} image={true ? RichBoy : PoorBoy} />
           <CardGraph>
             <S.CardHeader>
               <h3>Relação</h3>
             </S.CardHeader>
-            <ChartComponent
-              options={options}
-              series={[55, 44]}
-              type='pie'
-              width='350px'
-            />
+            {outcome && income && (
+              <ChartComponent
+                options={options}
+                series={[income, outcome]}
+                type='pie'
+                width='350px'
+              />
+            )}
           </CardGraph>
         </S.Row>
         <S.Row paddingBottom='1rem'>
@@ -113,7 +162,7 @@ const Dashboard: React.FC = () => {
                 },
               ]}
               type='line'
-              width='900px'
+              width='1000px'
               height='280px'
             />
           </CardGraph>
