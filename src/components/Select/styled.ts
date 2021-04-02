@@ -20,8 +20,8 @@ export const Select = styled.select`
   min-width: 110px;
   border-radius: 0.5rem;
   border: none;
-  background-color: lightgray;
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
 `
 export const Selector = styled.span`
@@ -30,7 +30,7 @@ export const Selector = styled.span`
   top: 0;
   right: 0;
   padding: 0.4rem 0.7rem;
-  background-color: lightgray;
+  background-color: #fff;
   border-radius: 0.5rem;
   margin-top: 15px;
   cursor: pointer;
