@@ -19,3 +19,10 @@ export const Box = styled.div`
   max-height: 24rem;
   height: 24rem;
 `
+export const Row = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+`

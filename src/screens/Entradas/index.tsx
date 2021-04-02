@@ -8,6 +8,7 @@ import mockCardData from '../../mocks/cardsMockData'
 import * as S from './styled'
 import FilterHeader from '../../components/FilterHeader'
 import Card from '../../components/Cards/CardRow'
+import { current_month, current_year } from '../../utils/constants'
 interface IEntries {
   id: number
   operation_type: string
@@ -16,10 +17,6 @@ interface IEntries {
   date: string
   status: string
 }
-
-const today = new Date()
-const current_month = String(today.getMonth() + 1)
-const current_year = String(today.getFullYear())
 
 const Entradas: React.FC = () => {
   const [entriesData, setEntriesData] = useState<IEntries[]>([])
