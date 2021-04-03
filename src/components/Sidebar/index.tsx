@@ -4,11 +4,11 @@ import * as S from './styled'
 import MyFinanceLogo from '../../assets/logo.svg'
 import { sidebarOption } from '../../utils/sidebarOptions'
 
-interface IProps {
+interface ISidebar {
   openSidebar: boolean
 }
 
-const Sidebar: React.FC<IProps> = ({ openSidebar }) => {
+const Sidebar: React.FC<ISidebar> = ({ openSidebar }) => {
   const [selected, setSelected] = useState<string>('Dashboard')
 
   const handleSelected = (name: string) => {

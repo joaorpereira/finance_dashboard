@@ -36,6 +36,12 @@ export const Row = styled.div<UIRow>`
   width: 100%;
   padding-bottom: ${props => props.paddingBottom};
 `
+
+export const Item = styled.div`
+  display: flex;
+  width: 49%;
+`
+
 export const CardHeader = styled.div<UICardHeader>`
   width: 100%;
   display: flex;

@@ -15,8 +15,11 @@ import { FaArrowUp, FaArrowDown, FaDollarSign } from 'react-icons/fa'
 
 import mockCardData from '../../mocks/cardsMockData'
 
-import { options } from './constants'
+import { options, barOptions, lineOptions } from './constants'
 import { current_month, current_year } from '../../utils/constants'
+import useHandleOperations from '../../hooks/useHandleOperations'
+import useHistoryData from '../../hooks/useHistoryData'
+import useLineGraphicData from '../../hooks/useLineGraphicData'
 interface IBalance {
   id: number
   operation_type: string
@@ -28,12 +31,22 @@ interface IBalance {
 
 const Dashboard: React.FC = () => {
   const [data, setData] = useState<IBalance[]>([])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filteredData, setFilteredData] = useState<IBalance[]>([])
   const [month, setMonth] = useState<string>(current_month)
   const [year, setYear] = useState<string>(current_year)
-  const [income, setIncome] = useState<number>()
-  const [outcome, setOutcome] = useState<number>()
-  const [expenses, setExpenses] = useState<number>()
+  const [income, setIncome] = useState<number>(0)
+  const [outcome, setOutcome] = useState<number>(0)
+  const [expenses, setExpenses] = useState<number>(0)
+  const [recurrentOutcome, setRecurrentOutcome] = useState<number>(0)
+  const [eventualOutcome, setEventualOutcome] = useState<number>(0)
+  const [recurrentIncome, setRecurrentIncome] = useState<number>(0)
+  const [eventualIncome, setEventualIncome] = useState<number>(0)
+
+  const entradas = useHandleOperations(mockCardData, 'ENTRADA')
+  const saidas = useHandleOperations(mockCardData, 'SAIDA')
+  const historyDate = useHistoryData(entradas, saidas)
+  const [entryData, expenseData] = useLineGraphicData(historyDate)
 
   const monthOptions = useMemo(() => {
     const list = monthList
@@ -64,7 +77,8 @@ const Dashboard: React.FC = () => {
       return month === monthEntry && year === yearEntry
     })
     setFilteredData(newData)
-    handleValues(newData)
+    handleByOperation(newData)
+    handleByStatus(newData)
   }
 
   useEffect(() => {
@@ -72,18 +86,54 @@ const Dashboard: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month, year, data])
 
-  const handleValues = (data: IBalance[]) => {
-    const income = data
-      .filter(item => item.operation_type === 'ENTRADA')
-      .reduce((acc, val) => acc + val.value, 0)
-    const outcome = data
-      .filter(item => item.operation_type === 'SAIDA')
-      .reduce((acc, val) => acc + val.value, 0)
+  const handlOperation = (data: IBalance[], params: string) => {
+    const newData = data.filter(item => item.operation_type === params)
+    return newData
+  }
 
-    const total = income - outcome
-    setIncome(income)
-    setOutcome(outcome)
+  const handleByOperation = (data: IBalance[]) => {
+    const incomes = handlOperation(data, 'ENTRADA')
+    const incomeValue = incomes.reduce((acc, val) => acc + val.value, 0)
+    const outcomes = handlOperation(data, 'SAIDA')
+    const outcomeValue = outcomes.reduce((acc, val) => acc + val.value, 0)
+    const total = incomeValue - outcomeValue
+    setIncome(incomeValue)
+    setOutcome(outcomeValue)
     setExpenses(total)
+  }
+
+  const handleByStatus = (data: IBalance[]) => {
+    const eventualTotal = data.filter(item => item.status === 'EVENTUAL')
+    const recurrentTotal = data.filter(item => item.status === 'RECORRENTE')
+
+    let eventualOutcomeTotal = 0
+    let eventualIncomeTotal = 0
+
+    // eslint-disable-next-line array-callback-return
+    eventualTotal.map(item => {
+      if (item.operation_type === 'SAIDA') {
+        eventualOutcomeTotal += item.value
+      } else {
+        eventualIncomeTotal += item.value
+      }
+    })
+
+    let recurrentOutcomeTotal = 0
+    let recurrentIncomeTotal = 0
+
+    // eslint-disable-next-line array-callback-return
+    recurrentTotal.map(item => {
+      if (item.operation_type === 'SAIDA') {
+        recurrentOutcomeTotal += item.value
+      } else {
+        recurrentIncomeTotal += item.value
+      }
+    })
+
+    setRecurrentIncome(recurrentIncomeTotal)
+    setEventualIncome(eventualIncomeTotal)
+    setRecurrentOutcome(recurrentOutcomeTotal)
+    setEventualOutcome(eventualOutcomeTotal)
   }
 
   return (
@@ -129,36 +179,45 @@ const Dashboard: React.FC = () => {
           />
         </S.Row>
         <S.Row>
-          <CardContent positive={true} image={true ? RichBoy : PoorBoy} />
-          <CardGraph>
-            <S.CardHeader>
-              <h3>Relação</h3>
-            </S.CardHeader>
-            {outcome && income && (
+          <S.Item>
+            {outcome && income ? (
+              <CardContent
+                positive={income > outcome}
+                image={income > outcome ? RichBoy : PoorBoy}
+              />
+            ) : (
+              <CardGraph />
+            )}
+          </S.Item>
+          <S.Item>
+            <CardGraph>
+              <S.CardHeader>
+                <h3>Relação</h3>
+              </S.CardHeader>
               <ChartComponent
                 options={options}
                 series={[income, outcome]}
                 type='pie'
                 width='350px'
               />
-            )}
-          </CardGraph>
+            </CardGraph>
+          </S.Item>
         </S.Row>
-        <S.Row paddingBottom='1rem'>
+        <S.Row>
           <CardGraph height='400px'>
             <S.CardHeader marginBottom='1.5rem'>
               <h3>Histórico de saldo</h3>
             </S.CardHeader>
             <ChartComponent
-              options={options}
+              options={lineOptions}
               series={[
                 {
                   name: 'Entradas',
-                  data: [40, 30, 50, 10, 100, 90, 80, 20, 125, 120, 115, 110],
+                  data: entryData,
                 },
                 {
                   name: 'Saídas',
-                  data: [30, 40, 35, 50, 80, 50, 20, 100, 30, 40, 50, 60],
+                  data: expenseData,
                 },
               ]}
               type='line'
@@ -166,6 +225,52 @@ const Dashboard: React.FC = () => {
               height='280px'
             />
           </CardGraph>
+        </S.Row>
+        <S.Row paddingBottom='1rem'>
+          <S.Item>
+            <CardGraph>
+              <S.CardHeader>
+                <h3>Entradas</h3>
+              </S.CardHeader>
+              <ChartComponent
+                options={barOptions}
+                series={[
+                  {
+                    name: 'Recorrentes',
+                    data: [recurrentIncome],
+                  },
+                  {
+                    name: 'Eventuais',
+                    data: [eventualIncome],
+                  },
+                ]}
+                type='bar'
+                width='350px'
+              />
+            </CardGraph>
+          </S.Item>
+          <S.Item>
+            <CardGraph>
+              <S.CardHeader>
+                <h3>Saídas</h3>
+              </S.CardHeader>
+              <ChartComponent
+                options={barOptions}
+                series={[
+                  {
+                    name: 'Recorrentes',
+                    data: [recurrentOutcome],
+                  },
+                  {
+                    name: 'Eventuais',
+                    data: [eventualOutcome],
+                  },
+                ]}
+                type='bar'
+                width='350px'
+              />
+            </CardGraph>
+          </S.Item>
         </S.Row>
       </S.Main>
     </S.Wrapper>
