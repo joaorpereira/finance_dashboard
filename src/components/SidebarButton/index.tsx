@@ -2,12 +2,12 @@ import React, { Dispatch } from 'react'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import * as S from './styled'
 
-interface IProps {
+interface ISidebarBtn {
   openSidebar: boolean
   setOpenSidebar: Dispatch<boolean>
 }
 
-const SidebarButton: React.FC<IProps> = ({ openSidebar, setOpenSidebar }) => {
+const SidebarButton: React.FC<ISidebarBtn> = ({ openSidebar, setOpenSidebar }) => {
   return (
     <S.Span open={openSidebar} onClick={() => setOpenSidebar(!openSidebar)}>
       {openSidebar ? (

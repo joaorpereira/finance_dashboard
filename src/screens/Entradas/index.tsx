@@ -8,6 +8,8 @@ import mockCardData from '../../mocks/cardsMockData'
 import * as S from './styled'
 import FilterHeader from '../../components/FilterHeader'
 import Card from '../../components/Cards/CardRow'
+import { current_month, current_year } from '../../utils/constants'
+import useHandleOperations from '../../hooks/useHandleOperations'
 interface IEntries {
   id: number
   operation_type: string
@@ -17,23 +19,13 @@ interface IEntries {
   status: string
 }
 
-const today = new Date()
-const current_month = String(today.getMonth() + 1)
-const current_year = String(today.getFullYear())
-
 const Entradas: React.FC = () => {
-  const [entriesData, setEntriesData] = useState<IEntries[]>([])
   const [filteredData, setFilteredData] = useState<IEntries[]>([])
   const [month, setMonth] = useState<string>(current_month)
   const [year, setYear] = useState<string>(current_year)
   const [status, setStatus] = useState<string>('')
 
-  useEffect(() => {
-    const newEntries = mockCardData.filter(
-      item => item.operation_type === 'ENTRADA'
-    )
-    setEntriesData(newEntries)
-  }, [])
+  const entriesData = useHandleOperations(mockCardData, 'ENTRADA')
 
   const filteredDataByDate = (month: string, year: string, status: string) => {
     const newData: IEntries[] = entriesData.filter(item => {
