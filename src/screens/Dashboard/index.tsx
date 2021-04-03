@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Select from '../../components/Select'
 import HeaderTitle from '../../components/HeaderTitle'
 import monthList from '../../utils/monthList'
@@ -69,29 +69,12 @@ const Dashboard: React.FC = () => {
     }, 3000)
   }, [])
 
-  const filteredDataByDate = (month: string, year: string) => {
-    const newData: IBalance[] = mockCardData.filter(item => {
-      const date = new Date(item.date)
-      const monthEntry = String(date.getMonth() + 1)
-      const yearEntry = String(date.getFullYear())
-      return month === monthEntry && year === yearEntry
-    })
-    setFilteredData(newData)
-    handleByOperation(newData)
-    handleByStatus(newData)
-  }
-
-  useEffect(() => {
-    filteredDataByDate(month, year)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month, year, data])
-
   const handlOperation = (data: IBalance[], params: string) => {
     const newData = data.filter(item => item.operation_type === params)
     return newData
   }
 
-  const handleByOperation = (data: IBalance[]) => {
+  const handleByOperation = useCallback((data: IBalance[]) => {
     const incomes = handlOperation(data, 'ENTRADA')
     const incomeValue = incomes.reduce((acc, val) => acc + val.value, 0)
     const outcomes = handlOperation(data, 'SAIDA')
@@ -100,9 +83,9 @@ const Dashboard: React.FC = () => {
     setIncome(incomeValue)
     setOutcome(outcomeValue)
     setExpenses(total)
-  }
+  }, [])
 
-  const handleByStatus = (data: IBalance[]) => {
+  const handleByStatus = useCallback((data: IBalance[]) => {
     const eventualTotal = data.filter(item => item.status === 'EVENTUAL')
     const recurrentTotal = data.filter(item => item.status === 'RECORRENTE')
 
@@ -134,7 +117,26 @@ const Dashboard: React.FC = () => {
     setEventualIncome(eventualIncomeTotal)
     setRecurrentOutcome(recurrentOutcomeTotal)
     setEventualOutcome(eventualOutcomeTotal)
-  }
+  }, [])
+
+  const filteredDataByDate = useCallback(
+    (month: string, year: string, data: IBalance[]) => {
+      const newData = data.filter(item => {
+        const date = new Date(item.date)
+        const monthEntry = String(date.getMonth() + 1)
+        const yearEntry = String(date.getFullYear())
+        return month === monthEntry && year === yearEntry
+      })
+      setFilteredData(newData)
+      handleByOperation(newData)
+      handleByStatus(newData)
+    },
+    [handleByOperation, handleByStatus]
+  )
+
+  useEffect(() => {
+    filteredDataByDate(month, year, mockCardData)
+  }, [month, year, data, filteredDataByDate])
 
   return (
     <S.Wrapper>
