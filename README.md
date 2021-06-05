@@ -38,7 +38,7 @@
 
 **Finance Dashboard** is a website developed to be a finance monitor dashboard. In this application, the user can see their incomes and outcomes. Also, it's displayed a lot of information about their finance budget filtered by a period.
 
-This project was done as a technical challenge to improve my skills as a **Frontend Developer** and learn to use **Typescript** with **Typescript**.
+This project was done as a technical challenge to improve my skills as a **Frontend Developer** and learn to use **Typescript** with **React JS**.
 
 Their data is inside a mock file.
 
