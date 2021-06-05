@@ -1,46 +1,129 @@
-# Getting Started with Create React App
+<h1 align="center">
+    Finance Dashboard
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href="https://www.linkedin.com/in/joaorpereira/">
+    <img 
+        alt="Made by Joao Paulo" 
+        src="https://img.shields.io/badge/MADE%20BY-Joao%20Paulo-%230077b5?style=flat-square&logo=linkedin">
+  </a>
 
-## Available Scripts
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-%20brightgreen?style=flat-square&logo=">
 
-In the project directory, you can run:
+  <a href="https://www.typescriptlang.org/">
+    <img 
+        alt="Typescript" 
+        src="https://img.shields.io/badge/Stack-Typescript-%23007ACC?style=flat-square&logo=typescript">
+  </a>
+  <a href="#">
+    <img 
+        alt="React" 
+        src="https://img.shields.io/badge/Web-React-%23007ACC?style=flat-square&logo=REACT">
+  </a>
+</p>
 
-### `yarn start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+ <a href="#-about">About</a> •
+ <a href="#-technologies">Technologies</a> • 
+ <a href="#-how-to-download-the-project">How to download the project</a> • 
+ <a href="#-license">License</a> • 
+ <a href="#-developer">Developer</a>
+</p>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
+### 🔖 About
 
-### `yarn test`
+**Finance Dashboard** is a website developed to be a finance monitor dashboard. In this application, the user can see their incomes and outcomes. Also, it's displayed a lot of information about their finance budget filtered by a period.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project was done as a technical challenge to improve my skills as a **Frontend Developer** and learn to use **Typescript** with **Typescript**.
 
-### `yarn build`
+Their data is inside a mock file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The project can be accessed at the link: finance-dash.netlify.app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
+#### 💻 FrontEnd
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](finance-dashboard.gif)
 
-### `yarn eject`
+---
+### 🛠 Technologies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The following technologies/tools were used:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Typescript](https://www.typescriptlang.org/);
+- [ECS6+](http://www.ecma-international.org/ecma-262/6.0/);
+- [ReactJs](https://reactjs.org/);
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS);
+- [Styled-Components](https://styled-components.com/);
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML);
+- [React-Apexcharts](https://apexcharts.com/);
+- [Date-fns](https://date-fns.org/);
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
+### 📎 How to download the project
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+##### 👉 Tools needed:
+- Editor:
+- [Vscode](https://code.visualstudio.com/) was used in this project; 
+- [Node.Js](https://nodejs.org/en/) - Installed on your machine;
+- [Git](https://git-scm.com/downloads) - Installed on your machine;
 
-## Learn More
+##### 👉 Install dependencies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#->In the terminal:
+
+# Clone repository:
+$ git clone https://github.com/joaorpereira/finance_dashboard.git
+
+# Install dependencies:
+$ npm install
+
+# Start the project
+$ npm start
+
+# After loading the project it will automatically open a tab in the default browser.
+
+```
+---
+### 📜 License
+
+This project is under the MIT license. See the [LICENSE](LICENSE) file for more details.
+
+---
+
+### 👨‍💻 Developer
+
+<p align="center">
+    <a href="https://blog.rocketseat.com.br/author/thiago/">
+        <img 
+            style="border-radius: 50%;" 
+            src="https://avatars.githubusercontent.com/u/58570645?s=120&v=4" 
+            width="120px;" 
+            alt="Foto">
+        <br/>
+        <sub><b>Joao Paulo  🚀</b></sub>
+    </a>
+</p>
+</br>
+<h6 align="center">
+    Developed by Joao Paulo.
+</h6>
+
+<p align="center">
+    <a href="https://www.linkedin.com/in/joaorpereira">
+    <img 
+        alt="Linkedin Joao Paulo Rodrigues" 
+        src="https://img.shields.io/badge/-Joao%20Paulo-%230077b5?style=flat-square&logo=linkedin">
+    </a>
+    <a href="mailto:rpjoaopaulo28@gmail.com">
+        <img 
+            alt="gmail Joao Paulo" 
+            src="https://img.shields.io/badge/-Gmail-%23c14438?style=flat-square&logo=gmail&logoColor=white">
+    </a>
+</p>
