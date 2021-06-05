@@ -42,7 +42,7 @@ This project was done as a technical challenge to improve my skills as a **Front
 
 Their data is inside a mock file.
 
-The project can be accessed at the link: finance-dash.netlify.app
+The project can be accessed at the link: https://finance-dash.netlify.app/
 
 ---
 #### 💻 FrontEnd
