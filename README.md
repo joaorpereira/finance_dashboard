@@ -67,7 +67,6 @@ The following technologies/tools were used:
 ### 📎 How to download the project
 
 ##### 👉 Tools needed:
-- Editor:
 - [Vscode](https://code.visualstudio.com/) was used in this project; 
 - [Node.Js](https://nodejs.org/en/) - Installed on your machine;
 - [Git](https://git-scm.com/downloads) - Installed on your machine;
